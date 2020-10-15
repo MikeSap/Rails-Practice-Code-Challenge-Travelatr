@@ -11,8 +11,21 @@
 
 <h3>Featured Post: </h3>
 
+<%if @destination.posts != [] %>
 <%=link_to @destination.featured_post.title, post_path(@destination.featured_post)%>
+<%else%>
+This destination has no posts
+<%end%>
+
+
 
 
 <h3>Average age of bloggers who write about this spot:</h3>
-<p><%=@destination.avg_age%>
+
+<%if @destination.posts != [] %>
+<p><%=@destination.avg_age%></p>
+<%else%>
+This destination has no users
+<%end%>
+
+
