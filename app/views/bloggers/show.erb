@@ -1,0 +1,26 @@
+<h1>Name: <%=@blogger.name%></h1>
+<h3>Bio: <%=@blogger.bio%></h3>
+
+<h3>Total Likes: <%=@blogger.total_likes%></h3>
+
+<h3>Featured Post: </h3> <%if @blogger.posts != [] %>
+<%=link_to @blogger.featured_post.title, post_path(@blogger.featured_post)%>
+<%else%>
+This blogger has no posts
+<%end%>
+
+
+<h3>Top 5 Liked Posts:</h3>
+
+<%if @blogger.total_likes != 0 %>
+<ol>
+<%@blogger.top_5.each do |post|%>
+    
+   <li> <%=link_to post.title, post_path(post)%> </li>   
+   
+<%end%>
+</ol> 
+<%else%>
+This blogger has no likes
+<%end%>
+
