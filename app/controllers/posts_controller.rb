@@ -1,17 +1,17 @@
 class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit, :update, :add_likes]
-    before_action :set_attributes, only: [:new, :edit]
+    before_action :set_attributes, only: [:new, :edit, :update, :create]
     def new
         @post = Post.new
     end
 
     def create
-        post = Post.create(post_params)
-        if post.save
-            redirect_to post_path(post)
+        @post = Post.create(post_params)
+        if @post.save
+            redirect_to post_path(@post)
         else
-            flash[:errors] = post.errors.full_messages
-            redirect_to new_post_path
+            flash[:errors] = @post.errors.full_messages
+            render :new
         end
     end
 
@@ -28,8 +28,7 @@ class PostsController < ApplicationController
         if @post.valid?
             redirect_to post_path(@post)
         else
-            flash[:errors] = @post.errors.full_messages
-            redirect_to new_post_path
+            render :edit
         end
     end
 

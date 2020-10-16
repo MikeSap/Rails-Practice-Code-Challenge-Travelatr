@@ -1,12 +1,24 @@
 <h1>New Blogger</h1>
 
+<!-- 
 <% if flash[:errors] %>
 <% flash[:errors].each do |error| %>
   <p>  <%= error %> </p>
 <%end%>
 <%end%>
+-->
 
 <%= form_for @blogger do |f|%>
+  
+  <% if @blogger.errors.any? %>
+  <div id ="error_explanation">
+  <h2> <%= pluralize(@blogger.errors.count, "error") %> in this form</h2>
+  <ul>
+  <% @blogger.errors.full_messages.each do |message| %>
+  <li> <%=message %> </li>
+  <%end%>
+  </div>
+  <%end%>
 
     <%=f.label :name%>
     <%=f.text_field :name%><br>
